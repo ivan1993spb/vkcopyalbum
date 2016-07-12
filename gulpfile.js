@@ -9,7 +9,8 @@ gulp.task('build', function() {
     return gulp.src("src/*.js")
         .pipe(webpack({
             externals: {
-                "vkapi": "VK"
+                "vkapi": "VK",
+                "jquery": "jquery"
             }
         }))
         .pipe(uglify())

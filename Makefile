@@ -2,6 +2,7 @@
 deps:
 
 	npm install
+	bower install
 
 dev:
 
@@ -14,4 +15,4 @@ build:
 clean:
 
 	git clean -f
-	rm -rf node_modules dist
+	rm -rf node_modules bower_components dist
