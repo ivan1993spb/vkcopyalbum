@@ -29,5 +29,5 @@ gulp.task('less', function () {
 });
 
 gulp.task('watch', function () {
-    gulp.watch(["*.js", "src/*.js"], ['build']);
+    gulp.watch(["*.js", "src/*.js", "style/*.less"], ['build', 'less']);
 });
