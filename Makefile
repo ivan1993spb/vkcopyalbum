@@ -1,8 +1,12 @@
 
-deps:
+install:
 
 	npm install
 	bower install
+
+start:
+
+	http-server
 
 dev:
 
