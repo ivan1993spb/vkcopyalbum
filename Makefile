@@ -11,6 +11,7 @@ dev:
 build:
 
 	gulp build
+	gulp less
 
 clean:
 

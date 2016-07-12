@@ -2,10 +2,10 @@
 
 var VK = require('vkapi');
 var url = require('url');
-var jquery = require('jquery')
+var $ = require('jquery');
 
 
-// var test = "http://vk.com/grps0304"
+var test = "http://vk.com/grps0304"
 // var test = "http://vk.com/id147789572"
 // var test = "http://vk.com/event115597744"
 // var test = "http://vk.com/club124934146"
@@ -28,11 +28,19 @@ VK.api("utils.resolveScreenName", {
                 owner_id = -data.response.object_id;
             }
 
-            VK.api("photos.getAlbums", {"owner_id": owner_id}, function(data) { 
-                console.log("getAlbums:", data);
+            VK.api("photos.getAlbums", {"owner_id": owner_id}, function(data) {
+                if (data.response) {
+                    data.response.forEach(function(album){
+                        $("#albums").append($("<div></div>").text(album.title))
+                    });
+                } else {
+                    throw new Error("response was not received");
+                }
             });
         } else {
-            throw new Error("invalid object type: " + data.response.type)
+            throw new Error("invalid object type: " + data.response.type);
         }
+    } else {
+        throw new Error("response was not received");
     }
 });
