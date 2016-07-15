@@ -6,8 +6,10 @@ var rename = require('gulp-rename');
 var less = require('gulp-less');
 var cleanCSS = require('gulp-clean-css');
 var webpack = require('webpack-stream');
+var merge = require('merge-stream');
+var concat = require('gulp-concat');
 
-gulp.task('build', function() {
+gulp.task('scripts', function () {
     return gulp.src("src/*.js")
         .pipe(webpack({
             externals: {
@@ -20,14 +22,24 @@ gulp.task('build', function() {
         .pipe(gulp.dest('dist'));
 });
 
-gulp.task('less', function () {
-    return gulp.src('style/*.less')
-        .pipe(less())
+gulp.task('styles', function () {
+    var lessStream = gulp.src('style/*.less')
+        .pipe(less());
+
+    var cssStream = gulp.src('style/*.css');
+
+    return merge(lessStream, cssStream)
+        .pipe(concat('all.css'))
         .pipe(cleanCSS({compatibility: 'ie8'}))
-        .pipe(rename('style.css'))
+        .pipe(rename('all.min.css'))
         .pipe(gulp.dest('dist'));
 });
 
 gulp.task('watch', function () {
-    gulp.watch(["*.js", "src/*.js", "style/*.less"], ['build', 'less']);
+    gulp.watch(["src/*.js"], ['scripts']);
+    gulp.watch(["style/*.less", "style/*.css"], ['styles']);
 });
+
+gulp.task('build', ['scripts', 'styles']);
+
+gulp.task('default', ['build'])

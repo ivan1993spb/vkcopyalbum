@@ -3,20 +3,38 @@
 @block-background: #333;
 
 body {
-    font-family: "Courier New", Courier, "Lucida Sans Typewriter", "Lucida Typewriter", monospace;
-    font-size: 12px;
-    background-color: @background-color;
-    color: #fff;
     margin: 0px;
     padding: 0px;
 }
 
+#cover {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: rgba(0,0,0,0.6);
+    z-index: 5;
+    width: 100%;
+    height: 100%;
+    display: none;
+}
+
+#context {
+    padding: 15px;
+    position: relative;
+}
+
+/*
 .block {
     background-color: @block-background;
     padding: 10px;
     display: inline-block;
     width: 44%;
     margin: 5px;
+
+    font-family: "Courier New", Courier, "Lucida Sans Typewriter", "Lucida Typewriter", monospace;
+    font-size: 12px;
+    background-color: @background-color;
+    color: #fff;
 }
 
 #context {
@@ -36,3 +54,5 @@ input[type=text] {
 
 label {
 }
+
+*/

@@ -2,13 +2,10 @@
 install:
 
 	npm install
+	npm install http-server -g
 	bower install
 
 start:
-
-	http-server
-
-dev:
 
 	http-server & gulp watch &
 
@@ -20,7 +17,6 @@ stop:
 build:
 
 	gulp build
-	gulp less
 
 clean:
 
