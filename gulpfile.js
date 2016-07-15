@@ -21,11 +21,11 @@ gulp.task('build', function() {
 });
 
 gulp.task('less', function () {
-  return gulp.src('style/*.less')
-    .pipe(less())
-    .pipe(cleanCSS({compatibility: 'ie8'}))
-    .pipe(rename('style.css'))
-    .pipe(gulp.dest('dist'));
+    return gulp.src('style/*.less')
+        .pipe(less())
+        .pipe(cleanCSS({compatibility: 'ie8'}))
+        .pipe(rename('style.css'))
+        .pipe(gulp.dest('dist'));
 });
 
 gulp.task('watch', function () {
