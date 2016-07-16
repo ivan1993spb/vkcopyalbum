@@ -1,29 +1,44 @@
 
-@background-color: #000;
+@background-color: #fff;
 @block-background: #333;
+@cover-color: rgba(255, 255, 255, 0.6);
 
 body {
+    background-color: @background-color;
     margin: 0px;
     padding: 0px;
 }
 
-#cover {
+#cover-block {
+    background: @cover-color;
+    height: 100%;
+    left: 0;
     position: fixed;
     top: 0;
-    left: 0;
-    background: rgba(0,0,0,0.6);
     z-index: 5;
     width: 100%;
-    height: 100%;
-    display: none;
 }
+
+#cover-over-block {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 6;
+}
+
+#message-block {
+    cursor: pointer;
+}
+
+/*
 
 #context {
     padding: 15px;
     position: relative;
 }
 
-/*
+
 .block {
     background-color: @block-background;
     padding: 10px;
