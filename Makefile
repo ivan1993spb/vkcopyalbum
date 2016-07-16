@@ -2,7 +2,7 @@
 install:
 
 	npm install
-	npm install http-server -g
+	npm install http-server -g || rm -f npm-debug.log
 	bower install
 
 start:
