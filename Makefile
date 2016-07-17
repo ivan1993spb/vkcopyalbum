@@ -2,9 +2,7 @@
 install:
 
 	npm install
-	npm install http-server -g || rm -f npm-debug.log
 	bower install
-	go build tls_server.go
 
 start:
 
@@ -20,9 +18,10 @@ restart: stop start
 
 build:
 
+	go build tls_server.go
 	gulp build
 
 clean:
 
 	git clean -f
-	rm -rf node_modules bower_components dist
+	rm -rf node_modules bower_components dist tls_server
