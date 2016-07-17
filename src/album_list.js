@@ -12,20 +12,15 @@ exports.AlbumList = function (page_size) {
         'load': function (owner_id, callback) {
             console.log("loading albums for owner_id ", owner_id);
 
-            console.log(VK);
             VK.api("photos.getAlbums", {
                 "owner_id": owner_id,
                 "need_covers": 1
             }, function(data) {
-                console.log("loaded ", data);
-
-                if (data.response.length > 0) {
-                    list = data.response;
+                if (data.response.count > 0) {
+                    list = data.response.items;
                 } else {
                     list = [];
                 }
-
-                console.log("album list:", list);
 
                 if (typeof callback === "function") {
                     callback();
@@ -35,7 +30,6 @@ exports.AlbumList = function (page_size) {
 
         'show': function () {
             list.forEach(function (album) {
-                console.log("ok");
                 if (filterExp.test(album.title)) {
                     $("#albums").append($("<div></div>").text(album.title));
                 }
@@ -50,10 +44,6 @@ exports.AlbumList = function (page_size) {
             }
         }
     };
-
-    $(function () {
-        
-    });
 
     return albums;
 }

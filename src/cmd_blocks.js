@@ -20,19 +20,14 @@ exports.showMessage = function (message) {
 };
 
 exports.callSpinner = function () {
-    $("#cover-block").fadeIn("fast", function () {
-        $("#cover-over-block").css("display", "block");
-        $("#message-block").css("display", "none");
-        $("#cover-over-block > .spinner").fadeIn();
-    });
+    $("#cover-block").css("display", "block");
+    $("#cover-over-block").css("display", "block");
+    $("#message-block").css("display", "none");
+    $("#cover-over-block > .spinner").css("display", "block");
 
     return function (callback) {
         $("#cover-over-block > .spinner").fadeOut("fast", function () {
-            $("#cover-block").fadeOut("fast", function () {
-                if (typeof callback === "function") {
-                    callback();
-                }
-            });
+            $("#cover-block").fadeOut("fast", callback);
             $("#cover-over-block").css("display", "none");
         });
     }
