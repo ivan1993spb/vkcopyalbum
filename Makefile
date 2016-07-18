@@ -6,8 +6,8 @@ install:
 
 start:
 
-	./tls_server --addr=127.0.0.1:443 --cert=nw-normativ.ru.pem --key=nw-normativ.key & \
-		gulp watch &
+	./tls_server --addr=127.0.0.1:443 --cert=nw-normativ.ru.pem --key=nw-normativ.key &
+	gulp watch &
 
 stop:
 
