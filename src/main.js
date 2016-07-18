@@ -49,6 +49,13 @@ VK.init(function() {
             console.log("cannot get screen name");
         }
     });
+
+    $(function(){
+        $("#do_search").click(function(){
+            albums.setFilter($("#search_str").val());
+            albums.show();
+        });
+    });
 }, function() {
     cmd_blocks.showMessage("api initialization failed");
     console.log("api initialization failed");
