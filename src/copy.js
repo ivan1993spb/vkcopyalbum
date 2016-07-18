@@ -23,3 +23,7 @@ exports.copy = function (album) {
 		}
 	})
 };
+
+function copyPhoto(photo) {
+
+}

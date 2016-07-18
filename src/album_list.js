@@ -34,6 +34,7 @@ exports.AlbumList = function (page_size) {
             list.forEach(function (album) {
                 if (filterExp.test(album.title)) {
                     $("#albums").append($('<div class="album"></div>').append(
+                        $('<div></div>').append($("<img>").attr("src", album.thumb_src)),
                         $('<div class="album_title"></div>').text(album.title),
                         $('<div class="copy_button">copy</div>').on("click", {
                             'album': album
