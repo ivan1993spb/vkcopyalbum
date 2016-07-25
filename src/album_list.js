@@ -4,6 +4,7 @@ var VK = require('vkapi');
 var $ = require('jquery');
 var escapeStringRegexp = require('escape-string-regexp');
 var copyAlbum = require('./copy.js').copy;
+var cmd_blocks = require('./cmd_blocks.js');
 
 exports.AlbumList = function (page_size) {
     var list = [];
@@ -39,7 +40,11 @@ exports.AlbumList = function (page_size) {
                         $('<div class="copy_button">copy</div>').on("click", {
                             'album': album
                         }, function(event){
-                            copyAlbum(event.data.album)
+                            cmd_blocks.showPrompt(event.data.album.title, function(res) {
+                                console.log("input", res);
+                            });
+                            // copyAlbum(event.data.album);
+
                         })
                     ));
                 }

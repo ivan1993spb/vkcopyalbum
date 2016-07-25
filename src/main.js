@@ -6,7 +6,7 @@ var $ = require('jquery');
 var cmd_blocks = require('./cmd_blocks.js');
 var album_list = require('./album_list.js');
 
-var group_url = "http://vk.com/grps0304"
+var group_url = "http://vk.com/grps0304";
 
 var albums = album_list.AlbumList(10);
 
