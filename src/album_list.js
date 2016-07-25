@@ -9,9 +9,11 @@ var cmd_blocks = require('./cmd_blocks.js');
 exports.AlbumList = function (page_size) {
     var list = [];
     var filterExp = new RegExp();
+    var owner_id = 0;
 
     var albums = {
-        'load': function (owner_id, callback) {
+        'load': function (_owner_id, callback) {
+            owner_id = _owner_id;
             console.log("loading albums for owner_id ", owner_id);
 
             VK.api("photos.getAlbums", {
@@ -37,14 +39,35 @@ exports.AlbumList = function (page_size) {
                     $("#albums").append($('<div class="album"></div>').append(
                         $('<div></div>').append($("<img>").attr("src", album.thumb_src)),
                         $('<div class="album_title"></div>').text(album.title),
-                        $('<div class="copy_button">copy</div>').on("click", {
+                        $('<div class="copy_button">copy to</div>').on("click", {
                             'album': album
                         }, function(event){
-                            cmd_blocks.showPrompt(event.data.album.title, function(res) {
-                                console.log("input", res);
-                            });
-                            // copyAlbum(event.data.album);
+                            cmd_blocks.showPrompt(event.data.album.title, function(input) {
+                                if (!input) {
+                                    cmd_blocks.showMessage("Название нового альбома не может быть пустым!");
+                                    return
+                                }
 
+                                VK.api("photos.createAlbum", {
+                                    title:       input,
+                                    group_id:    (owner_id > -1) ? owner_id : owner_id * -1,
+                                    description: event.data.album.description
+                                }, function (data) {
+                                    if (data.error) {
+                                        if (data.error.error_code == 9) {
+                                            data.error.error_msg = "Попробуйте выполнить действие позже или дать новому альбому другое название";
+                                        }
+
+                                        cmd_blocks.showMessage("Не удалось добавить альбом. " + data.error.error_msg);
+                                        return;
+                                    }
+
+                                    if (data.response) {
+                                        console.log(data);
+                                        copyAlbum(album);
+                                    }
+                                });
+                            });
                         })
                     ));
                 }
@@ -66,4 +89,8 @@ exports.AlbumList = function (page_size) {
     };
 
     return albums;
+}
+
+function createAlbum () {
+
 }

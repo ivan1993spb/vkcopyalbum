@@ -19,6 +19,8 @@ $(function () {
 });
 
 exports.showMessage = function (message) {
+    $("#prompt-block").css("display", "none");
+
     $("#cover-block").fadeIn("fast", function () {
         $("#cover-over-block").css("display", "block");
         $("#cover-over-block > .spinner").css("display", "none");
@@ -34,8 +36,10 @@ exports.showPrompt = function (message, callback) {
 
         if (typeof callback === 'function') {
             var clickEvent = function () {
-                $("#prompt-block > button").unbind("click", clickEvent);
-                callback($("#prompt-block > input").val());
+                $("#cover-block").fadeOut('fast', function () {
+                    $("#prompt-block > button").unbind("click", clickEvent);
+                    callback($("#prompt-block > input").val());
+                });
             };
             $("#prompt-block > button").click(clickEvent);
         }
